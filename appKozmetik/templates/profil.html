@@ -1,0 +1,191 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap stil dosyasını yükle -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Belge</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-brand" href="/"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href=" / ">
+                            <span style="color: orange;">Serhat</span> Kölelik
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Anasayfa</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategoriler
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for i in category %}
+                            <li><a class="dropdown-item" href="/kategori/{{i.id}}/">{{ i.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ürünler</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{request.user}}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Profilim</a></li>
+                <li><a class="dropdown-item" href="cikis/">Çık ve git.</a></li>
+            </ul>
+        </div>
+        {% else %}
+        <a id="kaydol-btn" href="kaydol/">
+            <button type="button" class="btn" id="kaydol-btn" style="float: inline-end;">
+                <i class="fa-solid fa-right-to-bracket fa-xl" style="color: #ffffff;"></i> Hemen Kayıt Ol
+            </button>
+        </a>
+        {% endif %}
+    </nav>
+    <!-- NAV BAR END -->
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col">
+              <!-- Breadcrumb Navigasyon -->
+              <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+              </nav>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-lg-4">
+              <!-- Kullanıcı Kartı -->
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3">{{ request.user.first_name}} {{ request.user.last_name }}</h5>
+                  <p class="text-muted mb-1">{{request.user.job}}</p>
+                  <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary">Takip Et</button>
+                    <button type="button" class="btn btn-outline-primary ms-1">Mesaj Gönder</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Sosyal Medya Bilgileri -->
+              <div class="card mb-4 mb-lg-0">
+                <div class="card-body p-0">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <!-- Kullanıcı Bilgileri -->
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Username</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{request.user.username}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">İsim</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{request.user.first_name}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Soyisim</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{request.user.last_name}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{request.user.email}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Meslek</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{request.user.job}}</p>
+                    </div>
+                  </div>
+                  <br>
+                  <button type="button" class="btn btn-warning" name="user">Kaydet</button>
+                </div>
+              </div>
+              <!-- Proje Durumu -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h3>Ürün Ekle</h3>
+                        <form action="" method="POST" style="display: grid;">
+                        {% csrf_token %}
+                        <label class="d-black" for=""> Ürünün Adı </label>
+                        <input class="mt-2" type="text" name="product_name">
+                        <label class="d-black" for=""> Ürünün Açıklaması </label>
+                        <input class="mt-2" type="text" name="product_title" style="width:100; height:50px">
+                        <label class="d-black" for=""> Ürünün Fiyatı </label>
+                        <input class="mt-2" type="number" name="product_price">
+                        <label class="d-black" for=""> Ürünün Kategorisi </label>
+                        <select name="" id="">
+                          {% for i in categories %}
+                          <option value="{{i.id}}">{{i.title}}</option>
+                          {% endfor %}
+                        </select>
+                        <label class="d-black" for=""> Ürünün Fotoğrafı </label>
+                        <input class="mt-2" type="file" name="product_img">
+                          <br>
+                          <br>
+                        <button type="submit" class="btn btn-warning" name="product">Kaydet</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      
+      <!-- Bootstrap JavaScript dosyasını yükle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-4Iv+UuxIFZaVskMaDpxmBd6gDD+24C08+Wm9LXWR4v5SZUoBoGLsWju7QhA9rcl2" crossorigin="anonymous"></script>
+    </body>
+    </html>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+    <!-- SLIDER START -->
+    <div id="carouselExampleFade" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+            <div class="carousel-item position-relative active" style="height: 650px;">
+                <img src="{% static 'img/a11.jpg' %}" class="d-block w-100 h-100 position-absolute" alt="...">
+            </div>
+            <div class="carousel-item" style="height: 650px;">
+                <img src="{% static 'img/a12.jpg' %}" class="d-block w-100 h-100 position-absolute" alt="...">
+            </div>
+            <div class="carousel-item" style="height: 650px;">
+                <img src="{% static 'img/a13.jpg' %}" class="d-block w-100 h-100 position-absolute" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- SLIDER END -->
+
+    <!-- CARDS START -->
+    <div class="mt-5 container">
+        <div class="row mx-auto">
+            {% for i in products %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{i.product_img.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{i.title}}</h2>
+                    <p class="card-text">{{i.product_detail}}</p>
+                    <span class="card-text">{{i.product_price}}</span>
+                    <a href="/detay/{{i.id}}" class="btn btn-primary">Detay</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- CARDS END -->
+
+{% endblock body %}

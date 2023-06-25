@@ -1,0 +1,64 @@
+
+
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="navbar-brand" href="/"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=" / ">
+                        <span style="color: orange;">Serhat</span> Kölelik
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Anasayfa</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Kategoriler
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for i in categories %}
+                        <li><a class="dropdown-item" href="/kategori/{{i.id}}/">{{ i.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ürünler</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <form class="input-group" role="search" action="{% url 'Anasayfa' %}" method="GET" style="width: 15%; margin-left:50%">
+        <input type="search" class="form-control rounded" name="q" placeholder="Bilgi giriniz" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-primary">Ara</button>
+      </form>
+    
+    
+      {% if request.user.is_authenticated %}
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{request.user}}
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/profil/">Profilim</a></li>
+            <li><a class="dropdown-item" href="/cikis/">Çık ve git.</a></li>
+        </ul>
+    </div>
+    {% else %}
+    <a id="kaydol-btn" href="kaydol/">
+        <button type="button" class="btn" id="kaydol-btn" style="float: inline-end;">
+            <i class="fa-solid fa-right-to-bracket fa-xl" style="color: #ffffff;"></i> Hemen Kayıt Ol
+        </button>
+    </a>
+    {% endif %}
+</nav>
+<!-- NAV BAR END -->

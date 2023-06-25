@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <br>
+<br>
+<div class="container bootdey">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="pro-img-details" style="width: 40%;">
+                        <img src="{{product.product_img.url}}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="pro-d-title">
+                        <h2>
+                            {{product.title}}
+                        </h2>
+                    </h4>
+                    <p>
+                    </p>
+                    <div class="product_meta">
+                        <span class="posted_in"> <strong>Categories:{{product.category.title}}</strong> <a rel="tag"
+                                href="#"></a>.</span>
+                    </div>
+                    <div class="m-bot15"> <strong>Fiyatı : </strong> <span class="pro-price">
+                            {{product.product_price}}</span></div>
+                    <div class="form-group">
+                        <label>Adet</label>
+                        <input type="quantiy" placeholder="1" class="form-control quantity">
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'ürünEkle' product_id=product.id %}">
+                            <button type="button" class="mt-4 btn btn-info" style="color:white">Sepete Ekle</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex">
+        <div class="col-md-8">
+            <div class="d-flex flex-column comment-section">
+                {% for i in comment %}
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                            src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span
+                                class="d-block font-weight-bold name">Marry Andrews</span><span
+                                class="date text-black-50">{{i.date}} {{i.time}}</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text">{{i.comments}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
+                        src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="comments" id="form-control">
+                </div>
+                <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none"
+                        type="submit">Post comment</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
